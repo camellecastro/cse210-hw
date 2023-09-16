@@ -10,12 +10,12 @@ class Program
         Console.WriteLine ("");
 
         //Part 1 and 2, where the user chooses the magic number
-        Console.Write ("What is the magic number? ");
-        int magicNumber = int.Parse(Console.ReadLine());
+        //Console.Write ("What is the magic number? ");
+        //int magicNumber = int.Parse(Console.ReadLine());
 
         //Part 3, random number generator from 1-100
-        //Random randomGenerator = new Random ();
-        //int magicNumber = randomGenerator.Next(1,101);
+        Random randomGenerator = new Random ();
+        int magicNumber = randomGenerator.Next(1,101);
 
         int guess = -1;
         int count = 0;
