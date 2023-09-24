@@ -10,20 +10,22 @@ class Program
         while (true)
         { 
             Console.WriteLine(""); //white space
-            Console.WriteLine("My Daily Journal");
+            Console.WriteLine("My Daily Journal"); //program title
             Console.WriteLine (""); //whitespace
 
+            //Menu
             Console.WriteLine ("1. Write A New Entry");
             Console.WriteLine ("2. Display My Journal");
             Console.WriteLine ("3. Save Journal Entry To A File");
             Console.WriteLine ("4. Load Journal Entries From A File");
             Console.WriteLine ("5. Exit");
             Console.WriteLine (""); //white space
+
             Console.Write ("What do I like to do? ");
-            string userChoice = Console.ReadLine();
+            string userChoice = Console.ReadLine(); 
             Console.WriteLine(""); //white space
 
-            bool choice = false; //set this for line 71 save entry "n" option to go back at menu | resource: "https://stackoverflow.com/questions/6719630/how-to-escape-a-while-loop-in-c-sharp"
+            bool choice = false; //set this for line 73 save entry "n" option to go back at menu | resource: "https://stackoverflow.com/questions/6719630/how-to-escape-a-while-loop-in-c-sharp"
             while (!choice) 
             {
                 if (userChoice == "1")
@@ -62,7 +64,7 @@ class Program
                             Console.WriteLine(""); //white space
                             Console.WriteLine("DON'T FORGET to save journal entry to a file before closing the program.");
 
-                            //!uncomment line 61, 66 & 67 if you want user to directly save journal entry to a file!!!! for creativity
+                            //!uncomment line 63, 68 & 69 if you want user to directly save journal entry to a file!!!! for creativity
                             //string saveFileName = Console.ReadLine();
                             //theJournal.SaveToFile(saveFileName);
                             choice = true; //go back to menu options
@@ -83,26 +85,26 @@ class Program
                         }
                     } 
                 }
-                else if (userChoice == "2")
+                else if (userChoice == "2") //displayjournalentry
                 {
                     theJournal.DisplayAll();
                     break;
                 }   
-                else if (userChoice == "3")
+                else if (userChoice == "3") //savetofile
                 {
                     Console.Write("Save to (filename): ");
                     string saveFileName = Console.ReadLine();
                     theJournal.SaveToFile(saveFileName);
                     break;
                 }
-                else if (userChoice == "4")
+                else if (userChoice == "4") //loadfromfile
                 {
                     Console.Write("Load File (filename): ");
                     string loadFileName = Console.ReadLine();
                     theJournal.LoadFromFile(loadFileName);
                     break;
                 }
-                else if (userChoice == "5")
+                else if (userChoice == "5") //exit
                 {
                     Environment.Exit(0);
                     break;

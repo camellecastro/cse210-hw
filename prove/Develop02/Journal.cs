@@ -9,11 +9,13 @@ public class Journal //responsibility: Stores a list of journal entries
 
     //Methods:
     //AddEntry(newEntry : Entry) : void 
+
     public void AddEntry(Entry newEntry)
     {
         Entry entry = new Entry();
         _entries.Add(newEntry);
     }
+
     //DisplayAll() : void
     public void DisplayAll()
     {
@@ -22,6 +24,7 @@ public class Journal //responsibility: Stores a list of journal entries
             entry.Display();
         }
     }
+
     //SaveToFile(file : string):void
     public void SaveToFile(string filename)
     {
@@ -37,7 +40,7 @@ public class Journal //responsibility: Stores a list of journal entries
                 outputFile.WriteLine($"{entry._title}|{entry._date}|{entry._location}|{entry._promptText}|{entry._entryText}");
             }
         }
-
+        
         Console.WriteLine(""); //white space
         Console.WriteLine("Changes saved!");
         Console.WriteLine(""); //white space
