@@ -40,7 +40,7 @@ class Program
                     //generateprompt
                     anEntry._promptText = genPrompt.GetRandomPrompt();
                     Console.WriteLine(anEntry._promptText);
-                    anEntry._entryText= Console.ReadLine();
+                    anEntry._entryText = Console.ReadLine();
                     Console.WriteLine(""); //white space
                     Console.Write("Entry Title: "); //additional information Title for creativity
                     anEntry._title = Console.ReadLine();
