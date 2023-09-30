@@ -6,7 +6,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        ScriptureLibrary scriptureLibrary = new ScriptureLibrary();
+        //Please see ScriptureLibrary class. Added this to show creativity and exceed project requirements
+        ScriptureLibrary scriptureLibrary = new ScriptureLibrary(); 
         //get random scripture reference 
         Scripture scripture = scriptureLibrary.GetRandomScripture();
 
@@ -25,6 +26,7 @@ class Program
             }
             else if (userInput == "" && !scripture.IsCompletelyHidden())
             {
+                //made sure that hidden words are randomly select from only those words that are not already hidden (see Scripture class for reference)
                 scripture.HideRandomWords(1);
             }
             else if (userInput == "" && scripture.IsCompletelyHidden())
