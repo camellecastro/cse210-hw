@@ -34,7 +34,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("Invalid input. Press Enter to continue...");
+                Console.WriteLine("\nInvalid input. Press Enter to continue...");
                 Console.ReadLine();
             }
         }
