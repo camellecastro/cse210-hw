@@ -1,5 +1,6 @@
 using System;
-
+using System.Collections.Generic;
+using System.IO;
 public abstract class Goal
 {
     protected string _shortName;
@@ -24,7 +25,8 @@ public abstract class Goal
     public abstract bool IsComplete();
     public virtual string GetDetailsString()
     {
-        return $"[ ] {_shortName} - {_description}";
+        string completionStatus = IsComplete() ? "[X]" : "[ ]";
+        return $"{completionStatus} {_shortName} - {_description}";
     }
     public abstract string GetStringRepresentation();
 
@@ -32,5 +34,9 @@ public abstract class Goal
     protected virtual int GetGoalType()
     {
         return 0;
+    }
+    public virtual int GetPoints()
+    {
+        return _points;
     }
 }

@@ -5,6 +5,9 @@ class Program
     static void Main(string[] args)
     {
         GoalManager menu = new GoalManager();
-        menu.Start();
+        while (true)
+        {
+            menu.Start();
+        }
     }
 }

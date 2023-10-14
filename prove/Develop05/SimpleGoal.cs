@@ -15,8 +15,6 @@ public class SimpleGoal : Goal
         if (!_isComplete)
         {
             _isComplete = true;
-            _points += _points;
-            // You can optionally provide points here
         }
     }
     public override bool IsComplete()
@@ -30,5 +28,9 @@ public class SimpleGoal : Goal
     protected override int GetGoalType()
     {
         return 1;
+    }
+    public override int GetPoints()
+    {
+        return _points;
     }
 }

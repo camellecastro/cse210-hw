@@ -14,16 +14,11 @@ public class ChecklistGoal : Goal
 
     public override void RecordEvent()
     {
-        // Add your logic here for recording the event
-        // For example, increment the amount completed and add points based on the current status
+        // Increment the amount completed
         _amountCompleted++;
-        if (_amountCompleted < _target)
+        if (_amountCompleted == _target)
         {
-            _points += 50; // Example: Add 50 points each time the goal is recorded
-        }
-        else if (_amountCompleted == _target)
-        {
-            _points += _bonus; // Example: Add a bonus when the target is reached
+            _points += _bonus; // Add bonus points when the target is reached
         }
     }
     public override bool IsComplete()
@@ -32,14 +27,20 @@ public class ChecklistGoal : Goal
     }
     public override string GetDetailsString()
     {
-        return $"[ ] {_shortName} - {_description} (Completed {_amountCompleted}/{_target} times)";
+        string completionStatus = IsComplete() ? "[X]" : "[ ]";
+        return $"{completionStatus} {_shortName} - {_description}. Completed {_amountCompleted}/{_target}";
     }
     public override string GetStringRepresentation()
     {
-        return $"{GetGoalType()}|{_shortName}|{_description}|{_points}|{_target}|{_bonus}|{_amountCompleted}";
+        return $"{GetGoalType()}|{_shortName}|{_description}|{_points}|{_amountCompleted}|{_target}|{_bonus}";
     }
     protected override int GetGoalType()
     {
         return 3;
     }
+    public override int GetPoints()
+    {
+        return _points;
+    }
+
 }

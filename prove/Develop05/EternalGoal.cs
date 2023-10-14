@@ -11,20 +11,29 @@ public class EternalGoal : Goal
 
     public override void RecordEvent()
     {
-        eventCounter++;
-        _points += _points;
+        eventCounter++; //count every event accomplished
+        // _points += _points;
     }
     public override bool IsComplete()
     {
-        return false;
+        return false; //never considered complete
+    }
+    public override string GetDetailsString()
+    {
+        string completionStatus = IsComplete() ? "[X]" : "[ ]";
+        return $"{completionStatus} {_shortName} - {_description}. Completed {eventCounter} times";
     }
     public override string GetStringRepresentation()
     {
-        return $"{GetGoalType()}|{_shortName}|{_description}|{_points}|{eventCounter}";
+        return $"{GetGoalType()}|{_shortName}|{_description}|{_points}|{eventCounter}"; 
     }
     protected override int GetGoalType()
     {
         return 2;
+    }
+    public override int GetPoints()
+    {
+        return _points;
     }
 
 }
