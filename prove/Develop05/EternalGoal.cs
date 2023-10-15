@@ -2,16 +2,16 @@ using System;
 
 public class EternalGoal : Goal
 {
-    private int eventCounter; // Counter to keep track of how many times the goal is recorded
+    private int _eventCounter; // Counter to keep track of how many times the goal is recorded
 
     public EternalGoal(string name, string description, int points) : base(name, description, points)
     {
-        eventCounter = 0; // Initialize the event counter to 0
+        _eventCounter = 0; // Initialize the event counter to 0
     }
 
     public override void RecordEvent()
     {
-        eventCounter++; //count every event accomplished
+        _eventCounter++; //count every event accomplished
         // _points += _points;
     }
     public override bool IsComplete()
@@ -21,19 +21,19 @@ public class EternalGoal : Goal
     public override string GetDetailsString()
     {
         string completionStatus = IsComplete() ? "[X]" : "[ ]";
-        return $"{completionStatus} {_shortName} - {_description}. Completed {eventCounter} times";
+        return $"{completionStatus} {_shortName} - {_description}. Completed {_eventCounter} times";
     }
     public override string GetStringRepresentation()
     {
-        return $"{GetGoalType()}|{_shortName}|{_description}|{_points}|{eventCounter}"; 
-    }
-    protected override int GetGoalType()
-    {
-        return 2;
+        return $"EternalGoal|{_shortName}|{_description}|{_points}|{_eventCounter}"; 
     }
     public override int GetPoints()
     {
         return _points;
+    }
+    public void SetAmountCompleted(int amountCompleted)
+    {
+        _eventCounter = amountCompleted;
     }
 
 }

@@ -23,11 +23,7 @@ public class SimpleGoal : Goal
     }
     public override string GetStringRepresentation()
     {
-        return $"{GetGoalType()}|{_shortName}|{_description}|{_points}|{_isComplete}";
-    }
-    protected override int GetGoalType()
-    {
-        return 1;
+        return $"SimpleGoal|{_shortName}|{_description}|{_points}|{_isComplete}";
     }
     public override int GetPoints()
     {

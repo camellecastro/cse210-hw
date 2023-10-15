@@ -32,15 +32,14 @@ public class ChecklistGoal : Goal
     }
     public override string GetStringRepresentation()
     {
-        return $"{GetGoalType()}|{_shortName}|{_description}|{_points}|{_amountCompleted}|{_target}|{_bonus}";
-    }
-    protected override int GetGoalType()
-    {
-        return 3;
+        return $"ChecklistGoal|{_shortName}|{_description}|{_points}|{_amountCompleted}|{_target}|{_bonus}";
     }
     public override int GetPoints()
     {
         return _points;
     }
-
+    public void SetAmountCompleted(int amountCompleted)
+    {
+        _amountCompleted = amountCompleted;
+    }
 }
