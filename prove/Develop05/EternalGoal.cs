@@ -9,10 +9,10 @@ public class EternalGoal : Goal
         _eventCounter = 0; // Initialize the event counter to 0
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
-        _eventCounter++; //count every event accomplished
-        // _points += _points;
+        _eventCounter++; // Count every event accomplished
+        return _points; // Return the points earned for each event
     }
     public override bool IsComplete()
     {
@@ -21,19 +21,14 @@ public class EternalGoal : Goal
     public override string GetDetailsString()
     {
         string completionStatus = IsComplete() ? "[X]" : "[ ]";
-        return $"{completionStatus} {_shortName} - {_description}. Completed {_eventCounter} times";
+        return $"{completionStatus} {_shortName} ({_description}) : Completed {_eventCounter} times";
     }
     public override string GetStringRepresentation()
     {
         return $"EternalGoal|{_shortName}|{_description}|{_points}|{_eventCounter}"; 
     }
-    public override int GetPoints()
-    {
-        return _points;
-    }
     public void SetAmountCompleted(int amountCompleted)
     {
         _eventCounter = amountCompleted;
     }
-
 }

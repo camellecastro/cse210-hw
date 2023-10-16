@@ -105,7 +105,7 @@ public class GoalManager
         Console.WriteLine("2. Eternal Goal");
         Console.WriteLine("3. Checklist Goal");
         Console.Write("\nWhich type of goal would you like to create: ");
-        //string goalType = int.Parse(Console.ReadLine());
+
         string goalType = Console.ReadLine();
 
         Console.Write("Enter goal title: ");
@@ -150,8 +150,8 @@ public class GoalManager
         {
             Goal selectedGoal = _goals[goalIndex];
             selectedGoal.RecordEvent();
-            _score += selectedGoal.GetPoints();
-            Console.WriteLine($"Congratulations! You've earned {selectedGoal.GetPoints()} points.");
+            _score += selectedGoal.RecordEvent();
+            Console.WriteLine($"Congratulations! You've earned {selectedGoal.RecordEvent()} points.");
             Console.WriteLine("Event recorded!");
         }
         else
@@ -174,12 +174,13 @@ public class GoalManager
             Console.WriteLine("\nChanges saved!");
         }
     }
+    
     public void LoadGoals(string filename)
     {
         Console.WriteLine($"\nLoading goals from {filename} . . .\n");
         _goals.Clear();
         string[] lines = System.IO.File.ReadAllLines(filename);
-        
+
         if (lines.Length > 0)
         {
             if (int.TryParse(lines[0], out int score))
@@ -197,27 +198,22 @@ public class GoalManager
         {
             string[] parts = lines[i].Split("|");
 
-            
             string type = parts[0];
             string shortName = parts[1];
             string description = parts[2];
             int points = int.Parse(parts[3]);
-            //determine goal type
-            // if (type == "SimpleGoal")
-            // {
-            //     SimpleGoal goal = new SimpleGoal(shortName, description, points);
-            //     _goals.Add(goal); // SimpleGoal
-            //     // _goals.Add(new SimpleGoal(shortName, description, points)); // SimpleGoal
-            // }
+
             if (type == "SimpleGoal")
             {
                 SimpleGoal goal = new SimpleGoal(shortName, description, points);
 
-                // Parse the boolean value from parts[4]
-                if (bool.TryParse(parts[4], out bool isComplete))
+                if (int.TryParse(parts[4], out int isComplete))
                 {
-                    // Set the IsComplete property based on the parsed boolean value
-                    goal.IsComplete();
+                    // Set the IsComplete property based on the parsed integer value
+                    if (isComplete == 1)
+                    {
+                        goal.RecordEvent(); // Mark the SimpleGoal as complete
+                    }
                 }
                 else
                 {
@@ -227,12 +223,12 @@ public class GoalManager
 
                 _goals.Add(goal); // Add the SimpleGoal to the list
             }
+
             else if (type == "EternalGoal")
             {
-
                 EternalGoal goal = new EternalGoal(shortName, description, points);
                 goal.SetAmountCompleted(int.Parse(parts[4]));
-                _goals.Add(goal); // EternalGoal
+                _goals.Add(goal);
             }
             else if (type == "ChecklistGoal")
             {
@@ -240,30 +236,10 @@ public class GoalManager
                 int bonus = int.Parse(parts[6]);
                 ChecklistGoal goal = new ChecklistGoal(shortName, description, points, target, bonus);
                 goal.SetAmountCompleted(int.Parse(parts[4]));
-                _goals.Add(goal); // ChecklistGoal
+                _goals.Add(goal);
             }
-                // Add the goal to the list
         }
         Console.WriteLine($"\nGoals successfully loaded from '{filename}'.\n");
     }
 
-    public void ShowSpinner(int seconds)
-    {
-        for (int i = 0; i < seconds; i++)
-        {
-            Console.Write("/");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-            Console.Write("-");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-            Console.Write("\\");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-            Console.Write("|");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-        }
-        Console.WriteLine("");
-    }
 }
