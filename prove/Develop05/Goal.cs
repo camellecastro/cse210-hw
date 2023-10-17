@@ -20,7 +20,6 @@ public abstract class Goal
     {
         string completionStatus = IsComplete() ? "[X]" : "[ ]";
         return $"{completionStatus} {_shortName} ({_description})";
-        // return $"[ ] {_shortName} - {_description}";
     }
     public abstract string GetStringRepresentation();
 }

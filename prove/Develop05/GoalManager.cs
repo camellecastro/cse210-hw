@@ -17,6 +17,7 @@ public class GoalManager
     {
         while (true)
         {
+            Console.WriteLine($"\nEternal Quest");
             Console.WriteLine($"\nYou have {_score} points.\n");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create New Goal");
@@ -24,7 +25,8 @@ public class GoalManager
             Console.WriteLine("3. Save Goals");
             Console.WriteLine("4. Load Goals");
             Console.WriteLine("5. Record Event");
-            Console.WriteLine("6. Quit");
+            Console.WriteLine("6. Random Goal Generator"); // New option to view daily challenges
+            Console.WriteLine("7. Quit");
 
             Console.Write("\nSelect a choice from the menu: ");
             string userChoice = Console.ReadLine();
@@ -60,7 +62,12 @@ public class GoalManager
                     RecordEvent();
                     break;
                 }
-                else if (userChoice == "6")
+                if (userChoice == "6")
+                {
+                    RandomGoal();
+                    break;
+                }
+                else if (userChoice == "7")
                 {
                     Environment.Exit(0);
                     break;
@@ -149,10 +156,7 @@ public class GoalManager
         if (goalIndex >= 0 && goalIndex < _goals.Count)
         {
             Goal selectedGoal = _goals[goalIndex];
-            selectedGoal.RecordEvent();
             _score += selectedGoal.RecordEvent();
-            Console.WriteLine($"Congratulations! You've earned {selectedGoal.RecordEvent()} points.");
-            Console.WriteLine("Event recorded!");
         }
         else
         {
@@ -238,8 +242,77 @@ public class GoalManager
                 goal.SetAmountCompleted(int.Parse(parts[4]));
                 _goals.Add(goal);
             }
+            else
+            {
+                RandomGoal goal = new RandomGoal(description);
+                if (int.TryParse(parts[4], out int isComplete))
+                {
+                    // Set the IsComplete property based on the parsed integer value
+                    if (isComplete == 1)
+                    {
+                        goal.RecordEvent(); 
+                    }
+                }
+                _goals.Add(goal);
+            }
         }
         Console.WriteLine($"\nGoals successfully loaded from '{filename}'.\n");
+    }
+    // Method to view and complete daily challenges
+    public void RandomGoal()
+    {
+        string random = GenerateRandomGoal(); // Generate a random daily challenge
+        Console.WriteLine($"\nRandom Goal: {random}");
+        _goals.Add(new RandomGoal(random));
+    }
+
+    // Method to generate a random daily challenge (you can customize this as needed)
+    public string GenerateRandomGoal()
+    {
+        string[] prompts = new string[]
+        {
+            "Clean out your closet and donate unused clothes",
+            "Read a book in a single day",
+            "Take a 30-minute walk in the park",
+            "Try a new recipe for dinner",
+            "Write a thank-you note to someone you appreciate",
+            "Declutter your desk or workspace",
+            "Plant a flower or herb in your garden",
+            "Organize your digital photos into folders",
+            "Learn a basic magic trick to amuse friends",
+            "Try a new fitness class at the gym",
+            "Call a friend or family member you haven't spoken to in a while",
+            "Create a budget for the month",
+            "Write a short poem or story",
+            "Visit a museum or art gallery",
+            "Take a day trip to a nearby town or city",
+            "Learn a few basic yoga poses",
+            "Read a chapter of a book",
+            "Do 30 minutes of exercise",
+            "Learn a new word in a foreign language",
+            "Write a journal entry",
+            "Practice a musical instrument for 15 minutes",
+            "Volunteer for a local charity or organization",
+            "Explore a new hiking trail",
+            "Learn to juggle three balls",
+            "Host a small dinner party or gathering",
+            "Try a new type of healthy drink",
+            "Write down three things you're grateful for",
+            "Build a small piece of furniture or assemble a DIY kit",
+            "Watch a classic film you've never seen before",
+            "Clean and organize your car",
+            "Complete an unfinished project",
+            "Make a homemade gift for someone special",
+            "Go for a bike ride in your neighborhood",
+            "Try a new craft or art project",
+            "Have a technology-free day",
+            "Create a vision board for your future goals",
+            "Write a note for your future self",
+            "Learn a few basic phrases in a new language",
+        };
+        Random random = new Random();
+        int index = random.Next(prompts.Length);
+        return prompts[index];
     }
 
 }

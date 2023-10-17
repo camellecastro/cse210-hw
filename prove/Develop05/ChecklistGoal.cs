@@ -14,14 +14,16 @@ public class ChecklistGoal : Goal
     public override int RecordEvent()
     {
         // Increment the amount completed
-        _amountCompleted++;
+        _amountCompleted ++;
         
         if (_amountCompleted == _target)
         {
             _points += _bonus; // Add bonus points when the target is reached
+            Console.WriteLine($"Congratulations! You've earned {_points} points and a bonus for {_bonus} points.");
             return _bonus; // Return the bonus points
         }
-
+        int _count = _target - _amountCompleted;
+        Console.WriteLine($"Congratulations! You've earned {_points} points. You have to do it for {_count} more time for your bonus.");
         return _points; // Return the regular points if the target is not reached
     }
     public override bool IsComplete()

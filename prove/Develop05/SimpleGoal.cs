@@ -11,17 +11,12 @@ public class SimpleGoal : Goal
 
     public override int RecordEvent()
     {
-        // Mark the simple goal as complete and return the points
-        if (_isComplete == 0)
-        {
-            _isComplete = 1; // Mark the simple goal as complete
-            return _points; // Return the points earned
-        }
-        return 0; // Return 0 if the goal is already complete
+        _isComplete = 1;
+        Console.WriteLine($"Congratulations! You've earned {_points} points for accomplishing that goal.");
+        return _points;
     }
     public override bool IsComplete()
     {
-        // return _isComplete;
         return _isComplete > 0;
     }
     public override string GetStringRepresentation()

@@ -12,6 +12,7 @@ public class EternalGoal : Goal
     public override int RecordEvent()
     {
         _eventCounter++; // Count every event accomplished
+        Console.WriteLine($"Congratulations! You've earned {_points} points for accomplishing your eternal goal for {_eventCounter} times.");
         return _points; // Return the points earned for each event
     }
     public override bool IsComplete()
