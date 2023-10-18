@@ -18,7 +18,7 @@ public class GoalManager
         while (true)
         {
             Console.WriteLine($"\nEternal Quest");
-            Console.WriteLine($"\nYou have {_score} points.\n");
+            DisplayPlayerInfo();
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");
@@ -83,7 +83,7 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-        Console.WriteLine($"\nYou have {_score} points.");
+        Console.WriteLine($"\nYou have {_score} points.\n");
     }
 
     public void ListGoalNames()
@@ -95,7 +95,6 @@ public class GoalManager
             Console.WriteLine(_goals[i].GetDetailsString());
         }
     }
-
     public void ListGoalDetails()
     {
         foreach (Goal goal in _goals)
@@ -156,7 +155,7 @@ public class GoalManager
         if (goalIndex >= 0 && goalIndex < _goals.Count)
         {
             Goal selectedGoal = _goals[goalIndex];
-            _score += selectedGoal.RecordEvent();
+            _score += selectedGoal.RecordEvent(); //or set a variable for selectedGoal.RecordEvent()
         }
         else
         {
@@ -166,7 +165,6 @@ public class GoalManager
 
     public void SaveGoals(string filename)
     {
-        
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
             Console.WriteLine("\nSaving changes . . .\n");
