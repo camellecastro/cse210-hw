@@ -13,10 +13,16 @@ public class PetShow
     public void InitializePetsActivity()
     {
         Console.WriteLine("\nPet Show Activities:\n");
+
+        int actNumber = 1; // Initialize the act number
+
         foreach (Pet pet in _userAdoptedPets)
         {
             string activity = pet.Activity();
-            Console.WriteLine($"Act 1: {activity}");
+            Console.WriteLine($"Act {actNumber}: {activity}");
+            actNumber++; // Increment the act number for the next activity
         }
+
+        Console.WriteLine("\nPetshow ended.");
     }
 }

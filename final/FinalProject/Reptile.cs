@@ -8,7 +8,7 @@ public class Reptile : Pet
     {
         _activities.Add($"{_name} the {breed} showcase its climbing ability and agility in the obstacle course that you've created.");
         _activities.Add($"{_name} the {breed} highlights its natural behavior, basking under a heat lamp.");
-        _activities.Add($"{_name} the {breed} Reptile shows stillness it almost look like a detailed artpiece.");
+        _activities.Add($"{_name} the {breed} shows stillness, it almost look like a detailed artpiece.");
     }
     public override string Activity()
     {
@@ -18,7 +18,7 @@ public class Reptile : Pet
     }
     public override string PetDetails()
     {
-        return $"{_name} (The {_breed} Dog)\nHealth: {_health}\nHunger: {_hunger}\nHappiness: {_happiness}";
+        return $"{_name} (The {_breed} Reptile)\nHealth: {_health}\nHunger: {_hunger}\nHappiness: {_happiness}";
     }
     public override string PetDetailsStringRepresentation()
     {

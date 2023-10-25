@@ -10,7 +10,7 @@ public class Dog : Pet
         _activities.Add($"{_name} the {breed} barks and rolled over!");
         _activities.Add($"{_name} the {breed} gave a high-five with its paw!");
         _activities.Add($"{_name} the {breed} jump through a hooop!");
-        _activities.Add($"{_name} the {breed} balanced a treat on its nose beefore eating it.");
+        _activities.Add($"{_name} the {breed} balanced a treat on its nose before eating it.");
     }
     public override string Activity()
     {

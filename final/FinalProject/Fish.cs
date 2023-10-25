@@ -7,7 +7,7 @@ public class Fish : Pet
     public Fish(string name, string breed) : base (name, breed)
     {
         _activities.Add($"{_name} the {breed} swim through the obstacle course inside its tank!");
-        _activities.Add($"{_name} the {breed} amusingly interacts with its reflection when placed a mirror on the outside of its tank");
+        _activities.Add($"{_name} the {breed} amusingly interacts with its reflection when placed a mirror on the outside of its tank.");
         _activities.Add($"{_name} the {breed} swims up to grab floating food pellets.");
         _activities.Add($"{_name} the {breed} swims around its tank.");
     }

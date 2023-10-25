@@ -43,6 +43,8 @@ public class Menu
         {
             Console.WriteLine($"\nVirtual Pet Simulator Game");
             DisplayPetOwnerInfo();
+            // Check pet's hunger levels and remove them if necessary
+            CheckHunger();
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Adopt Pet");
             Console.WriteLine("2. Feed Pet");
@@ -109,10 +111,22 @@ public class Menu
     {
         Console.WriteLine($"\nPet Owner: {_userName}\n");
     }
-
+    public void CheckHunger()
+    {
+        for (int i = _pets.Count - 1; i >= 0; i--)
+        {
+            Pet pet = _pets[i];
+            if (pet.IsDead())
+            {
+                pet.DeathStatus();
+                _pets.RemoveAt(i);
+            }
+        }
+    }
     public void ViewPetStatus()
     {
         DisplayPetOwnerInfo();
+
         Console.WriteLine("\nPets:\n");
         for (int i = 0; i < _pets.Count; i++)
         {
@@ -129,7 +143,8 @@ public class Menu
         Console.WriteLine("2. Cat");
         Console.WriteLine("3. Bird");
         Console.WriteLine("4. Fish");
-        Console.Write("\nWhich pet would you like to adopt? (Dog, Cat, Bird, Fish, Reptile)\n-- ");
+        Console.WriteLine("5. Reptile");
+        Console.Write("\nWhich pet would you like to adopt? (Type: Dog, Cat, Bird, Fish, Reptile)\n-- ");
 
         string _petType = Console.ReadLine();
 
@@ -179,8 +194,9 @@ public class Menu
 
     public void FeedPet()
     {
+        Console.Clear();
         ViewPetStatus();
-        Console.Write("\nWhich pet would you like to feed? (1 to " + _pets.Count + "): ");
+        Console.Write("\nWhich pet would you like to feed? \n(Type number of corresponding pet: 1 to " + _pets.Count + "): ");
         int petIndex = int.Parse(Console.ReadLine()) - 1;
 
         if (petIndex >= 0 && petIndex < _pets.Count)
@@ -196,6 +212,7 @@ public class Menu
     }
     public void PlayWithPet()
     {
+        Console.Clear();
         ViewPetStatus();
         Console.Write("\nWhich pet would you like to play with? (1 to " + _pets.Count + "): ");
         int petIndex = int.Parse(Console.ReadLine()) - 1;
@@ -252,32 +269,43 @@ public class Menu
             int hunger = int.Parse(parts[4]);
             int happiness = int.Parse(parts[5]);
 
+            Pet pet = null;
+
+            // Create the appropriate pet object based on its type
             if (type == "Dog")
             {
-                Pet pet = new Dog(name, breed);
-                _pets.Add(pet); 
+                pet = new Dog(name, breed);
             }
-
             else if (type == "Cat")
             {
-                Pet pet = new Cat(name, breed);
-                _pets.Add(pet); 
+                pet = new Cat(name, breed);
             }
             else if (type == "Bird")
             {
-                Pet pet = new Bird(name, breed);
-                _pets.Add(pet); 
+                pet = new Bird(name, breed);
             }
             else if (type == "Fish")
             {
-                Pet pet = new Fish(name, breed);
-                _pets.Add(pet); 
-            }   
+                pet = new Fish(name, breed);
+            }
             else if (type == "Reptile")
             {
-                Pet pet = new Reptile(name, breed);
-                _pets.Add(pet); 
-            }            
+                pet = new Reptile(name, breed);
+            }
+
+            if (pet != null)
+            {
+                // Set the loaded health, hunger, and happiness values
+                pet.SetHealth(health);
+                pet.SetHunger(hunger);
+                pet.SetHappiness(happiness);
+
+                _pets.Add(pet);
+            }
+            else
+            {
+                Console.WriteLine("Invalid pet type encountered while loading the game.");
+            }
         }
         Console.WriteLine($"Game is successfully loaded from '{filename}'.\n");
     }
